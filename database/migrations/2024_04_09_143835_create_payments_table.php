@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('regNo');
-            $table->string('email')->unique();
+            $table->string('dept');
+            $table->string('email');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

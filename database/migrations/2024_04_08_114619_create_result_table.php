@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('course');
             $table->string('semester');
             $table->string('grade');
+            $table->integer('credit');
             $table->integer('point');
             $table->integer('level');
             $table->timestamps();

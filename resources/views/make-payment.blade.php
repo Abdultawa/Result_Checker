@@ -11,7 +11,7 @@
         <div class="max-w-xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <div class="p-6">
                 <h2 class="text-2xl font-semibold mb-4">Make Payment</h2>
-                <i>Pls make sure you provide your correct name and registration number</i>
+                <i class="text-red-500">Pls make sure you provide your correct name and registration number</i>
                 <form action="{{ route('processPayment') }}" method="POST">
                     @csrf
                     <div class="mb-4 mt-2">
@@ -25,6 +25,10 @@
                     <div class="mb-4">
                         <label for="regNo" class="block text-sm font-medium text-gray-700">RegNo</label>
                         <input type="text" name="regNo" id="regNo" value="" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter RegNo">
+                    </div>
+                    <div class="mb-4">
+                        <label for="dept" class="block text-sm font-medium text-gray-700">Department</label>
+                        <input type="text" name="dept" id="dept" value="" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Enter Department">
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>

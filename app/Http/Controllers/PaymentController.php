@@ -43,12 +43,14 @@ class PaymentController extends Controller
             'firstname' =>'required',
             'lastname' =>'required',
             'regNo' =>'required',
+            'dept' => 'required',
             'email' => 'required|email',
         ]);
         Payment::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'regNo' => $request->regNo,
+            'dept' => $request->dept,
             'email' => $request->email,
             
         ]);

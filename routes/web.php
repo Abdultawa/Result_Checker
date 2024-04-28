@@ -17,15 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [CheckResultController::class, 'show'])->middleware('guest')->name('welcome');
-Route::post('check', [CheckResultController::class, 'check'])->middleware('guest')->name('check');
-Route::get('result/{RegNo}/{Semester}', [CheckResultController::class, 'showResult'])->name('result');
-Route::get('make-payment/{regNo}', [PaymentController::class, 'makePayment'])->name('makePayment')->middleware('makePayment');
-Route::post('process-payment', [PaymentController::class, 'processPayment'])->name('processPayment');
-Route::get('statement', [PaymentController::class, 'statement'])->name('statement');
+Route::controller(ResultController::class)->middleware('auth')->group(function(){
+    Route::get('dashboard', 'show')->name('dashboard');
+    Route::post('store', 'store')->name('importResult');
+});
 
-Route::get('dashboard', [ResultController::class, 'show'])->middleware('auth')->name('dashboard');
-Route::post('store', [ResultController::class, 'store'])->middleware('auth')->name('importResult');
+Route::controller(CheckResultController::class)->group(function(){
+    Route::get('/', 'show')->middleware('guest')->name('welcome');
+    Route::post('check', 'check')->middleware('guest')->name('check');
+    Route::get('result/{RegNo}/{Semester}', 'showResult')->name('result');
+
+});
+
+Route::controller(PaymentController::class)->group(function(){
+    Route::get('make-payment/{regNo}', 'makePayment')->name('makePayment')->middleware('makePayment');
+    Route::post('process-payment', 'processPayment')->name('processPayment');
+    Route::get('statement', 'statement')->name('statement');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

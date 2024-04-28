@@ -33,8 +33,9 @@ class ResultController extends Controller
                     'course' => $row[2],
                     'semester' => $row[3],
                     'grade' => $row[4],
-                    'point' => $row[5],
-                    'level' => $row[6]
+                    'credit' => $row[5],
+                    'point' => $row[6],
+                    'level' => $row[7]
                 ]);
             }
             fclose($handle);
