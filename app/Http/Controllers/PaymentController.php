@@ -19,11 +19,11 @@ class PaymentController extends Controller
             'Authorization' => 'Bearer ' . env('PAYSTACK_SECRET_KEY'),
             'Content-Type' => 'application/json',
         ])->get('https://api.paystack.co/transaction/verify/' . $request->reference);
-    
+
         // Check if the request was successful
-        
+
         if ($response->successful()) {
-            // Get the transaction data from the response            
+            // Get the transaction data from the response
             if ($response->json('data.status') === 'success') {
                 Payment::where('email', $response->json('data.customer.email'))->update(['status' => 'success']);
                 $payment = Payment::where('email', $response->json('data.customer.email'))->first();
@@ -35,7 +35,7 @@ class PaymentController extends Controller
             return back()->with('error', 'Failed to verify transaction. Please try again later.');
         }
     }
-    
+
     public function processPayment(Request $request)
     {
         // Validate the form data
@@ -52,15 +52,15 @@ class PaymentController extends Controller
             'regNo' => $request->regNo,
             'dept' => $request->dept,
             'email' => $request->email,
-            
+
         ]);
-    
+
         // Call the Paystack API to initiate the payment
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . env('PAYSTACK_SECRET_KEY'),
             'Content-Type' => 'application/json',
         ])->post('https://api.paystack.co/transaction/initialize', [
-            'amount' => 2000 * 100, 
+            'amount' => 2000 * 100,
             'email' => $request->email,
             'callback_url' => route('statement'),
             'metadata' => [
@@ -73,17 +73,17 @@ class PaymentController extends Controller
                 ]
             ]
         ]);
-    
+
         // Check if the request was successful
         if ($response->successful()) {
             // Get the authorization URL from the response data
             $authorizationUrl = $response['data']['authorization_url'];
-            
+
             // Redirect the user to the payment gateway for payment
             return redirect()->away($authorizationUrl);
         } else {
             return back()->with('error', 'Failed to initiate payment. Please try again later.');
         }
     }
-    
+
 }

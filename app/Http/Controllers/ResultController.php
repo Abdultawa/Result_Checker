@@ -51,4 +51,14 @@ class ResultController extends Controller
 
     return redirect()->back()->with('error', 'No file uploaded');
 }
+
+        public function deleteResults()
+        {
+            // Delete all results from the results table
+            Result::truncate();
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'All results have been deleted successfully.');
+        }
+
 }
