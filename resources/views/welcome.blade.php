@@ -18,8 +18,7 @@
         </style>
     </head>
     <body class="antialiased">
-    <div style="background-image: url('/InstitutionLogo.png'); background-position:center; background-repeat:no-repeat;">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center  selection:bg-red-500 selection:text-white">
+        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center  selection:bg-red-500 selection:text-white bg-gradient-to-r from-indigo-300 via-purple-200 to-pink-300">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
@@ -52,6 +51,15 @@
                     <option value="Second Semester">Second Semester</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="level" class="block text-sm font-medium text-gray-900">Select Level</label>
+                <select id="level" name="level" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <option value="100">100 Level</option>
+                    <option value="200">200 Level</option>
+                    <option value="300">300 Level</option>
+                    <option value="400">400 Level</option>
+                </select>
+            </div>
             <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Check Result</button>
         </form>
     </div>
@@ -64,6 +72,5 @@
         <p>{{ session('error') }}</p>
     </div>
     @endif
-    </div>
     </body>
 </html>

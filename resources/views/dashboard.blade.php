@@ -24,12 +24,14 @@
                                     </div>
                                 </div>
                             </form>
+                            <!-- @admin
                             <form action="{{ route('deleteResults') }}" method="POST" class="mt-4">
                                 @csrf
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-44">
                                     Delete All Results
                                 </button>
                             </form>
+                            @endadmin -->
                         </div>
                     </div>
 

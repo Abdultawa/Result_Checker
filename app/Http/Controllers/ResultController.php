@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -59,6 +60,17 @@ class ResultController extends Controller
 
             // Redirect back with a success message
             return redirect()->back()->with('success', 'All results have been deleted successfully.');
+        }
+        public function manageUser(){
+            $users = User::paginate(10); // Paginate the results, 10 users per page
+
+            return view('result.manageUser', compact('users'));
+        }
+
+        public function deleteUser(User $user)
+        {
+            $user->delete();
+            return redirect()->back()->with('success', 'User deleted successfully!');
         }
 
 }

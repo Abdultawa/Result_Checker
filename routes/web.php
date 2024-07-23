@@ -21,12 +21,15 @@ Route::controller(ResultController::class)->middleware('auth')->group(function()
     Route::post('/delete-results', 'deleteResults')->name('deleteResults');
     Route::get('dashboard', 'show')->name('dashboard');
     Route::post('store', 'store')->name('importResult');
+    Route::get('manageUser', 'manageUser')->name('result.manageUser');
+    Route::delete('deleteUser/{user}', 'deleteUser')->name('result.deleteUser');
 });
+
 
 Route::controller(CheckResultController::class)->group(function(){
     Route::get('/', 'show')->middleware('guest')->name('welcome');
     Route::post('check', 'check')->middleware('guest')->name('check');
-    Route::get('result/{RegNo}/{Semester}', 'showResult')->name('result');
+    Route::get('result/{RegNo}/{Semester}/{level}', 'showResult')->name('result');
 
 });
 
